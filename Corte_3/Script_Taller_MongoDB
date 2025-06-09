@@ -1,0 +1,329 @@
+use biblioteca
+switched to db biblioteca
+db.autores.insertMany([
+  {
+    nombre: "Gabriel García Márquez",
+    nacionalidad: "Colombiana",
+    fecha_nacimiento: ISODate("1927-03-06T00:00:00Z")
+  },
+  {
+    nombre: "Isabel Allende",
+    nacionalidad: "Chilena",
+    fecha_nacimiento: ISODate("1942-08-02T00:00:00Z")
+  }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68470ddbf4d948ba0bd82815'),
+    '1': ObjectId('68470ddbf4d948ba0bd82816')
+  }
+}
+db.autores.find().pretty()
+{
+  _id: ObjectId('68470ddbf4d948ba0bd82815'),
+  nombre: 'Gabriel García Márquez',
+  nacionalidad: 'Colombiana',
+  fecha_nacimiento: 1927-03-06T00:00:00.000Z
+}
+{
+  _id: ObjectId('68470ddbf4d948ba0bd82816'),
+  nombre: 'Isabel Allende',
+  nacionalidad: 'Chilena',
+  fecha_nacimiento: 1942-08-02T00:00:00.000Z
+}
+
+db.libros.insertOne({
+  titulo: "Cien años de soledad",
+  anio: 1967,
+  genero: "Novela",
+  autor_id: ObjectId("68470ddbf4d948ba0bd82815")
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('68470efdf4d948ba0bd82817')
+}
+db.libros.insertMany([
+  {
+    titulo: "El amor en los tiempos del cólera",
+    anio: 1985,
+    genero: "Novela",
+    autor_id: ObjectId("68470ddbf4d948ba0bd82816")
+  },
+  {
+    titulo: "Crónica de una muerte anunciada",
+    anio: 1981,
+    genero: "Novela corta",
+    autor_id: ObjectId("68470ddbf4d948ba0bd82815")
+  }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68473aa8f4d948ba0bd82818'),
+    '1': ObjectId('68473aa8f4d948ba0bd82819')
+  }
+}
+db.libros.find().pretty()
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816')
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio: 1981,
+  genero: 'Novela corta',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.find({ titulo: "Cien años de soledad" })
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.find({ anio: { $gt: 1980 } })
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816')
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio: 1981,
+  genero: 'Novela corta',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.updateMany(
+  { genero: "Novela" },
+  { $set: { idioma: "Español" } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+db.libros.find({ anio: { $gt: 1980, $lt: 1990 } })
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español'
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio: 1981,
+  genero: 'Novela corta',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.find({ anio: { $ne: 1985 } })
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815'),
+  idioma: 'Español'
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio: 1981,
+  genero: 'Novela corta',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.find({
+  $or: [
+    { genero: "Novela" },
+    { anio: { $lt: 1980 } }
+  ]
+})
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815'),
+  idioma: 'Español'
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español'
+}
+db.libros.find({ $and: [ { genero: "Novela" }, { anio: { $gt: 1980 } } ] })
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español'
+}
+db.libros.find({ idioma: { $exists: true } })
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815'),
+  idioma: 'Español'
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español'
+}
+
+db.libros.find({ idioma: { $exists: false } })
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio: 1981,
+  genero: 'Novela corta',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815')
+}
+db.libros.aggregate([
+  {
+    $project: {
+      titulo: 1,
+      anio_original: "$anio",
+      anio_mas_10: { $add: ["$anio", 10] }
+    }
+  }
+])
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio_original: 1967,
+  anio_mas_10: 1977
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio_original: 1985,
+  anio_mas_10: 1995
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  anio_original: 1981,
+  anio_mas_10: 1991
+}
+db.libros.aggregate([
+  {
+    $project: {
+      titulo: 1,
+      resto: { $mod: ["$anio", 2] }
+    }
+  }
+])
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  resto: 1
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  resto: 1
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82819'),
+  titulo: 'Crónica de una muerte anunciada',
+  resto: 1
+}
+db.libros.updateMany(
+  { genero: "Novela" },
+  { $set: { tags: ["ficción", "historia", "clásico"] } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+db.libros.find({ tags: { $in: ["historia", "terror"] } })
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815'),
+  idioma: 'Español',
+  tags: [
+    'ficción',
+    'historia',
+    'clásico'
+  ]
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español',
+  tags: [
+    'ficción',
+    'historia',
+    'clásico'
+  ]
+}
+db.libros.find({ tags: { $in: ["horror"] } })
+db.libros.find({ tags: { $all: ["historia", "clásico"] } })
+{
+  _id: ObjectId('68470efdf4d948ba0bd82817'),
+  titulo: 'Cien años de soledad',
+  anio: 1967,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82815'),
+  idioma: 'Español',
+  tags: [
+    'ficción',
+    'historia',
+    'clásico'
+  ]
+}
+{
+  _id: ObjectId('68473aa8f4d948ba0bd82818'),
+  titulo: 'El amor en los tiempos del cólera',
+  anio: 1985,
+  genero: 'Novela',
+  autor_id: ObjectId('68470ddbf4d948ba0bd82816'),
+  idioma: 'Español',
+  tags: [
+    'ficción',
+    'historia',
+    'clásico'
+  ]
+}
+
+
