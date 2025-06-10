@@ -1,0 +1,550 @@
+use ClaseDos
+switched to db ClaseDos
+const pokes = [
+  {nombre:"Pikachu",poder:"Impactrueno",elemento:"eléctrico",nivel_poder:85,descripcion:"Un Pokémon eléctrico muy popular, conocido por su ternura y agilidad en combate.",altura_m:0.4,peso_kg:6.0},
+  {nombre:"Charizard",poder:"Llamarada",elemento:"fuego",nivel_poder:95,descripcion:"Dragón alado con un temperamento ardiente. Lanza fuego por su boca.",altura_m:1.7,peso_kg:90.5},
+  {nombre:"Bulbasaur",poder:"Látigo Cepa",elemento:"planta",nivel_poder:70,descripcion:"Tiene una semilla en su espalda que crece a medida que lo hace.",altura_m:0.7,peso_kg:6.9},
+  {nombre:"Squirtle",poder:"Pistola Agua",elemento:"agua",nivel_poder:72,descripcion:"Usa su caparazón como protección y lanza potentes chorros de agua.",altura_m:0.5,peso_kg:9.0},
+  {nombre:"Jigglypuff",poder:"Canto",elemento:"hada",nivel_poder:60,descripcion:"Su canto hace dormir a sus oponentes. Tiene una voz dulce y peligrosa.",altura_m:0.5,peso_kg:5.5},
+  {nombre:"Gengar",poder:"Bola Sombra",elemento:"fantasma",nivel_poder:88,descripcion:"Suele aparecer en la oscuridad. Se alimenta del miedo.",altura_m:1.5,peso_kg:40.5},
+  {nombre:"Snorlax",poder:"Golpe Cuerpo",elemento:"normal",nivel_poder:90,descripcion:"Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.",altura_m:2.1,peso_kg:460.0},
+];
+db.pokemons.insertMany(pokes)
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68477f0e4446d4247d148ef5'),
+    '1': ObjectId('68477f0e4446d4247d148ef6'),
+    '2': ObjectId('68477f0e4446d4247d148ef7'),
+    '3': ObjectId('68477f0e4446d4247d148ef8'),
+    '4': ObjectId('68477f0e4446d4247d148ef9'),
+    '5': ObjectId('68477f0e4446d4247d148efa'),
+    '6': ObjectId('68477f0e4446d4247d148efb')
+  }
+}
+db.pokemons.find()
+{
+  _id: ObjectId('68477f0e4446d4247d148ef5'),
+  nombre: 'Pikachu',
+  poder: 'Impactrueno',
+  elemento: 'eléctrico',
+  nivel_poder: 85,
+  descripcion: 'Un Pokémon eléctrico muy popular, conocido por su ternura y agilidad en combate.',
+  altura_m: 0.4,
+  peso_kg: 6
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef6'),
+  nombre: 'Charizard',
+  poder: 'Llamarada',
+  elemento: 'fuego',
+  nivel_poder: 95,
+  descripcion: 'Dragón alado con un temperamento ardiente. Lanza fuego por su boca.',
+  altura_m: 1.7,
+  peso_kg: 90.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta',
+  nivel_poder: 70,
+  descripcion: 'Tiene una semilla en su espalda que crece a medida que lo hace.',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef8'),
+  nombre: 'Squirtle',
+  poder: 'Pistola Agua',
+  elemento: 'agua',
+  nivel_poder: 72,
+  descripcion: 'Usa su caparazón como protección y lanza potentes chorros de agua.',
+  altura_m: 0.5,
+  peso_kg: 9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef9'),
+  nombre: 'Jigglypuff',
+  poder: 'Canto',
+  elemento: 'hada',
+  nivel_poder: 60,
+  descripcion: 'Su canto hace dormir a sus oponentes. Tiene una voz dulce y peligrosa.',
+  altura_m: 0.5,
+  peso_kg: 5.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efa'),
+  nombre: 'Gengar',
+  poder: 'Bola Sombra',
+  elemento: 'fantasma',
+  nivel_poder: 88,
+  descripcion: 'Suele aparecer en la oscuridad. Se alimenta del miedo.',
+  altura_m: 1.5,
+  peso_kg: 40.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax',
+  poder: 'Golpe Cuerpo',
+  elemento: 'normal',
+  nivel_poder: 90,
+  descripcion: 'Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.',
+  altura_m: 2.1,
+  peso_kg: 460
+}
+db.pokemons.find({"nivel de poder" : 80 })
+db.pokemons.find({"nivel_poder" : 80 })
+db.pokemons.find({"nivel_poder" : "80" })
+db.pokemons.find({"nivel_poder" : "90" })
+db.pokemons.find({"nivel_poder" : 90 })
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax',
+  poder: 'Golpe Cuerpo',
+  elemento: 'normal',
+  nivel_poder: 90,
+  descripcion: 'Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.',
+  altura_m: 2.1,
+  peso_kg: 460
+}
+db.pokemons.find({"peso_kg" : 460 },{ "nombre" } )
+SyntaxError: Unexpected token (1:47)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({[32m"peso_kg"[39m [33m:[39m [35m460[39m }[33m,[39m{ [32m"nombre"[39m } )
+ [90m   |[39m                                                [31m[1m^[22m[39m[0m
+db.pokemons.find({"peso_kg" : 460 },{ "nombre": true } )
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax'
+}
+db.pokemons.find({"peso_kg" : 460 },{ _id:false, "nombre": true } )
+{
+  nombre: 'Snorlax'
+}
+db.pokemons.find({"altura" : 0.5-1.7 },{  "elemento": true } )
+db.pokemons.find({altura: { $gte: 0.5, $lte: 1.7 } ,{  "elemento": true } )
+SyntaxError: Unexpected token (1:52)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({altura[33m:[39m { $gte[33m:[39m [35m0.5[39m[33m,[39m $lte[33m:[39m [35m1.7[39m } [33m,[39m{  [32m"elemento"[39m[33m:[39m [36mtrue[39m } )
+ [90m   |[39m                                                     [31m[1m^[22m[39m[0m
+db.pokemons.find({altura_m: { $gte: 0.5, $lte: 1.7 } ,{  "elemento": true } )
+SyntaxError: Unexpected token (1:54)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({altura_m[33m:[39m { $gte[33m:[39m [35m0.5[39m[33m,[39m $lte[33m:[39m [35m1.7[39m } [33m,[39m{  [32m"elemento"[39m[33m:[39m [36mtrue[39m } )
+ [90m   |[39m                                                       [31m[1m^[22m[39m[0m
+db.pokemons.find({altura_m: { $gte: 0.5, $lte: 1.7 }} ,{  "elemento": true } )
+{
+  _id: ObjectId('68477f0e4446d4247d148ef6'),
+  elemento: 'fuego'
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  elemento: 'planta'
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef8'),
+  elemento: 'agua'
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef9'),
+  elemento: 'hada'
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efa'),
+  elemento: 'fantasma'
+}
+db.pokemons.find({altura_m: { $gte: 0.5, $lte: 1.7 }} ,{ nombre:true, poder:true, elemento: true, _id :false } )
+{
+  nombre: 'Charizard',
+  poder: 'Llamarada',
+  elemento: 'fuego'
+}
+{
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta'
+}
+{
+  nombre: 'Squirtle',
+  poder: 'Pistola Agua',
+  elemento: 'agua'
+}
+{
+  nombre: 'Jigglypuff',
+  poder: 'Canto',
+  elemento: 'hada'
+}
+{
+  nombre: 'Gengar',
+  poder: 'Bola Sombra',
+  elemento: 'fantasma'
+}
+db.pokemons.find({$and: [
+  { altura_m: {$lt :1}},
+  { peso_kg: {$gt : 5}}
+]
+},{nombre:true, altura_m:true, peso_kg:true, _id:false})
+{
+  nombre: 'Pikachu',
+  altura_m: 0.4,
+  peso_kg: 6
+}
+{
+  nombre: 'Bulbasaur',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+{
+  nombre: 'Squirtle',
+  altura_m: 0.5,
+  peso_kg: 9
+}
+{
+  nombre: 'Jigglypuff',
+  altura_m: 0.5,
+  peso_kg: 5.5
+}
+db.pokemons.find({})
+{
+  _id: ObjectId('68477f0e4446d4247d148ef5'),
+  nombre: 'Pikachu',
+  poder: 'Impactrueno',
+  elemento: 'eléctrico',
+  nivel_poder: 85,
+  descripcion: 'Un Pokémon eléctrico muy popular, conocido por su ternura y agilidad en combate.',
+  altura_m: 0.4,
+  peso_kg: 6
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef6'),
+  nombre: 'Charizard',
+  poder: 'Llamarada',
+  elemento: 'fuego',
+  nivel_poder: 95,
+  descripcion: 'Dragón alado con un temperamento ardiente. Lanza fuego por su boca.',
+  altura_m: 1.7,
+  peso_kg: 90.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta',
+  nivel_poder: 70,
+  descripcion: 'Tiene una semilla en su espalda que crece a medida que lo hace.',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef8'),
+  nombre: 'Squirtle',
+  poder: 'Pistola Agua',
+  elemento: 'agua',
+  nivel_poder: 72,
+  descripcion: 'Usa su caparazón como protección y lanza potentes chorros de agua.',
+  altura_m: 0.5,
+  peso_kg: 9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef9'),
+  nombre: 'Jigglypuff',
+  poder: 'Canto',
+  elemento: 'hada',
+  nivel_poder: 60,
+  descripcion: 'Su canto hace dormir a sus oponentes. Tiene una voz dulce y peligrosa.',
+  altura_m: 0.5,
+  peso_kg: 5.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efa'),
+  nombre: 'Gengar',
+  poder: 'Bola Sombra',
+  elemento: 'fantasma',
+  nivel_poder: 88,
+  descripcion: 'Suele aparecer en la oscuridad. Se alimenta del miedo.',
+  altura_m: 1.5,
+  peso_kg: 40.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax',
+  poder: 'Golpe Cuerpo',
+  elemento: 'normal',
+  nivel_poder: 90,
+  descripcion: 'Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.',
+  altura_m: 2.1,
+  peso_kg: 460
+}
+db.pokemons.find({} nombre: /ba/ })
+SyntaxError: Unexpected token, expected "," (1:20)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({} nombre[33m:[39m [35m/ba/[39m })
+ [90m   |[39m                     [31m[1m^[22m[39m[0m
+db.pokemons.find({nombre: /ba/ })
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta',
+  nivel_poder: 70,
+  descripcion: 'Tiene una semilla en su espalda que crece a medida que lo hace.',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+db.pokemons.find({descripcion: /la/ })
+{
+  _id: ObjectId('68477f0e4446d4247d148ef5'),
+  nombre: 'Pikachu',
+  poder: 'Impactrueno',
+  elemento: 'eléctrico',
+  nivel_poder: 85,
+  descripcion: 'Un Pokémon eléctrico muy popular, conocido por su ternura y agilidad en combate.',
+  altura_m: 0.4,
+  peso_kg: 6
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef6'),
+  nombre: 'Charizard',
+  poder: 'Llamarada',
+  elemento: 'fuego',
+  nivel_poder: 95,
+  descripcion: 'Dragón alado con un temperamento ardiente. Lanza fuego por su boca.',
+  altura_m: 1.7,
+  peso_kg: 90.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta',
+  nivel_poder: 70,
+  descripcion: 'Tiene una semilla en su espalda que crece a medida que lo hace.',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef8'),
+  nombre: 'Squirtle',
+  poder: 'Pistola Agua',
+  elemento: 'agua',
+  nivel_poder: 72,
+  descripcion: 'Usa su caparazón como protección y lanza potentes chorros de agua.',
+  altura_m: 0.5,
+  peso_kg: 9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efa'),
+  nombre: 'Gengar',
+  poder: 'Bola Sombra',
+  elemento: 'fantasma',
+  nivel_poder: 88,
+  descripcion: 'Suele aparecer en la oscuridad. Se alimenta del miedo.',
+  altura_m: 1.5,
+  peso_kg: 40.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax',
+  poder: 'Golpe Cuerpo',
+  elemento: 'normal',
+  nivel_poder: 90,
+  descripcion: 'Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.',
+  altura_m: 2.1,
+  peso_kg: 460
+}
+db.pokemons.find({descripcion: /a })
+SyntaxError: Unterminated regular expression. (1:32)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({descripcion[33m:[39m [33m/[39ma })
+ [90m   |[39m                                 [31m[1m^[22m[39m[0m
+db.pokemons.find({descripcion: a/ })
+SyntaxError: Unexpected token (1:34)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({descripcion[33m:[39m a[33m/[39m })
+ [90m   |[39m                                   [31m[1m^[22m[39m[0m
+db.pokemons.find(nombre: { $in: ["fuego","planta","agua"]})
+SyntaxError: Unexpected token, expected "," (1:23)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind(nombre[33m:[39m { $in[33m:[39m [[32m"fuego"[39m[33m,[39m[32m"planta"[39m[33m,[39m[32m"agua"[39m]})
+ [90m   |[39m                        [31m[1m^[22m[39m[0m
+db.pokemons.find(elemento: { $in: ["fuego","planta","agua"]})
+SyntaxError: Unexpected token, expected "," (1:25)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind(elemento[33m:[39m { $in[33m:[39m [[32m"fuego"[39m[33m,[39m[32m"planta"[39m[33m,[39m[32m"agua"[39m]})
+ [90m   |[39m                          [31m[1m^[22m[39m[0m
+db.pokemons.find(elemento: { $in: ["fuego","planta","agua"]}})
+SyntaxError: Unexpected token, expected "," (1:25)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind(elemento[33m:[39m { $in[33m:[39m [[32m"fuego"[39m[33m,[39m[32m"planta"[39m[33m,[39m[32m"agua"[39m]}})
+ [90m   |[39m                          [31m[1m^[22m[39m[0m
+db.pokemons.find(elemento: { $in: ["fuego","planta","agua"]}})
+SyntaxError: Unexpected token, expected "," (1:25)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind(elemento[33m:[39m { $in[33m:[39m [[32m"fuego"[39m[33m,[39m[32m"planta"[39m[33m,[39m[32m"agua"[39m]}})
+ [90m   |[39m                          [31m[1m^[22m[39m[0m
+db.pokemons.find({elemento: { $in: ["fuego","planta","agua"]}})
+{
+  _id: ObjectId('68477f0e4446d4247d148ef6'),
+  nombre: 'Charizard',
+  poder: 'Llamarada',
+  elemento: 'fuego',
+  nivel_poder: 95,
+  descripcion: 'Dragón alado con un temperamento ardiente. Lanza fuego por su boca.',
+  altura_m: 1.7,
+  peso_kg: 90.5
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef7'),
+  nombre: 'Bulbasaur',
+  poder: 'Látigo Cepa',
+  elemento: 'planta',
+  nivel_poder: 70,
+  descripcion: 'Tiene una semilla en su espalda que crece a medida que lo hace.',
+  altura_m: 0.7,
+  peso_kg: 6.9
+}
+{
+  _id: ObjectId('68477f0e4446d4247d148ef8'),
+  nombre: 'Squirtle',
+  poder: 'Pistola Agua',
+  elemento: 'agua',
+  nivel_poder: 72,
+  descripcion: 'Usa su caparazón como protección y lanza potentes chorros de agua.',
+  altura_m: 0.5,
+  peso_kg: 9
+}
+const poke = {nombre : "new", poder:"telepatia",elemento:"siquico","nivel_poder":90, "vidas": 5}
+db.pokemos.find({ vidas:{ $exists:true}})
+const poke = {nombre : "new", poder:"telepatia",elemento:"siquico","nivel_poder":90, "vidas": 5}
+db.pokemons.insertOne(poke1)
+ReferenceError: poke1 is not defined
+db.pokemons.insertOne(poke)
+{
+  acknowledged: true,
+  insertedId: ObjectId('68478dee4446d4247d148efc')
+}
+db.pokemos.find({ vidas:{ $exists:true}})
+db.pokemos.find({ fechanac:{ $type: 'date' } })
+const poke = {nombre : "new", poder:"telepatia",elemento:"siquico","nivel_poder":90, "vidas": 5, fechanac: new Date()}
+db.pokemons.insertOne(poke)
+{
+  acknowledged: true,
+  insertedId: ObjectId('68478f554446d4247d148efd')
+}
+db.pokemos.find({ fechanac:{ $type: 'date' } })
+db.pokemos.find({ altura:{ $exists:true}})
+db.pokemons.find( { altura_m: {$gt: 2}}, {nombre:1, altura_m:1,_id:0})
+{
+  nombre: 'Snorlax',
+  altura_m: 2.1
+}
+db.pokemons.find( { altura_m: {$gt: 2}}, {nombre:true, altura_m:true,_id:false})
+{
+  nombre: 'Snorlax',
+  altura_m: 2.1
+}
+db.pokemons.find({ $and : [ { altura_m: { $exists: true}, {$gte : 2} } ]})
+SyntaxError: Unexpected token (1:58)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m db[33m.[39mpokemons[33m.[39mfind({ $and [33m:[39m [ { altura_m[33m:[39m { $exists[33m:[39m [36mtrue[39m}[33m,[39m {$gte [33m:[39m [35m2[39m} } ]})
+ [90m   |[39m                                                           [31m[1m^[22m[39m[0m
+db.pokemones.find({
+  altura_m: {
+    $exists: true,
+    $gt: 2
+  }
+})
+db.pokemones.find(
+  {
+    altura_m: {
+      $exists: true,
+      $gt: 2
+    }
+  },
+  {
+    nombre: 1,
+    altura_m: 1,
+    _id: 0
+  }
+)
+const traerpoke = db.pokemons.findOne({ elemento: normal })
+ReferenceError: normal is not defined
+const traerpoke = db.pokemons.findOne({ elemento: 'normal' })
+traerpoke
+{
+  _id: ObjectId('68477f0e4446d4247d148efb'),
+  nombre: 'Snorlax',
+  poder: 'Golpe Cuerpo',
+  elemento: 'normal',
+  nivel_poder: 90,
+  descripcion: 'Duerme la mayor parte del tiempo, pero es muy fuerte cuando se activa.',
+  altura_m: 2.1,
+  peso_kg: 460
+}
+traerpoke.peso_kg = 46
+46
+db.pokemons.save(traerpoke)
+TypeError: db.pokemons.save is not a function
+db.pokemons.updateOne({ elemento : 'normal'},{$set: { peso_kg: 46}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.pokemones.updateOne(
+  { vida: { $exists: true } },
+  { $set: { vida: 0 } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.pokemons.updateMany(
+  { altura_m: { $lt: 0.5 } },
+  { $inc: { altura_m: 0.1 } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.pokemons.updateOne(
+  { vidas: { $exists: true } },
+  { $set: { vidas: 0 } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.pokemons.updateOne(
+  { vidas: { $exists: true } },
+  { $unset: { vidas: true } }
+)
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.pokemons.deleteOne({nombre: 'charmander'})
+{
+  acknowledged: true,
+  deletedCount: 0
+}
+show collections
+pokemons
+ClaseDos
+Selection deleted
+
