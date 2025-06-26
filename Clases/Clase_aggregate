@@ -1,0 +1,115 @@
+[8:34 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+  {
+     $match:{
+        games:{ $exists: true }
+     }
+     
+  },
+  {
+     $project: {
+        _id: false, nombre: true, games: true,
+     }
+  },
+  {
+    $project:{
+       nombre: true,
+       firtsGame: {
+         $slice: ['$games', 1]
+       }
+    }
+
+  }
+])
+[9:00 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $match:{
+         scores: { $exists:true }
+     }
+   }, 
+   {
+       $project:{
+         _id: false, nombre:true, scores: true, elemento: true, peso_kg: true
+       }
+    },
+    {
+      $set:{
+         suma: { $sum: '$scores'}
+      }  
+
+    },
+
+    {
+      $set:{
+         avg: { $avg: '$scores'}
+      }  
+
+    },
+    {
+      $project:{
+        fullName: {
+          $concat: ['$nombre', '--', '$elemento']
+        },
+        peso_kg: true
+      }
+   
+    }
+])
+[9:03 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $group:{
+      _id: '$elemento'
+     }   
+   }
+])
+[9:05 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $group:{
+      _id: '$elemento'
+      total: { $sum: 1 }
+     }   
+   }
+])
+[9:06 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $group:{
+      _id: '$elemento',
+      total: { $sum: 1 }
+     }   
+   },
+   {
+     $sort:{
+       total: 1
+     }
+   }
+  
+])
+[9:07 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $group:{
+      _id: '$elemento',
+      total: { $sum: 1 }
+     }   
+   },
+   {
+     $sort:{
+       total: -1
+     }
+   }
+  
+])
+[9:08 PM, 6/16/2025] +57 317 4910155: db.pokemons.aggregate([
+   {
+     $group:{
+      _id: '$elemento',
+      total: { $sum: 1 }
+     }   
+   },
+   {
+     $sort:{
+       total: -1
+     }
+   },
+   {
+     $limit: 1
+   }
+])
